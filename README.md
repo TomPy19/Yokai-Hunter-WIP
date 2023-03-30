@@ -54,54 +54,54 @@ You will have 3 milestones to complete before submitting your final game project
 
 
 *Milestone 1: March 29*
-	Completed by Thomas:
+Completed by Thomas:
 	- Basic player movement and monster that follows player: March 15
-- Figure out monster ai: March 27
+	- Figure out monster ai: March 27
 Completed by Evan:
-- Full concept art for all entities and items: 27 //map still in progress
+	- Full concept art for all entities and items: 27 //map still in progress
 
 *Milestone 2: April 12*
-- Mechanic done where a weapon comes into contact with entity: March 15 //POSTPONED TO MILESTONE 2
-- Figure out all item management: March 27 //POSTPONED TO MILESTONE 2
-- Figure out damage scaling math: March 22 //POSTPONED TO MILESTONE 2
-- Full sprites and level design complete (unpolished): April 12
-- Figure out core gameplay loop mechanics: April 12
-Time portals to move between stages
-Boss movesets
-Loop/end/reset game
-Stat tracking for final endscreen
+	- Mechanic done where a weapon comes into contact with entity: March 15 //POSTPONED TO MILESTONE 2
+	- Figure out all item management: March 27 //POSTPONED TO MILESTONE 2
+	- Figure out damage scaling math: March 22 //POSTPONED TO MILESTONE 2
+	- Full sprites and level design complete (unpolished): April 12
+	- Figure out core gameplay loop mechanics: April 12
+	- Time portals to move between stages
+	- Boss movesets
+	- Loop/end/reset game
+	- Stat tracking for final endscreen
 
-Final Game Submission: April 26
-Completed and polished game
-Completed Game Document game
+*Final Game Submission: April 26*
+	- Completed and polished game
+	- Completed Game Document game
 
-Final Exam Presentation & Submission: May 4
-Presentation materials (e.g. slides, videos)
+*Final Exam Presentation & Submission: May 4*
+	- Presentation materials (e.g. slides, videos)
 
-MVP:
-Single map, some weapons working and dealing damage to monsters(that have some ai to follow where mc is going). Probably a boss fight once the timer hits a certain time. 
+*MVP:*
+	- Single map, some weapons working and dealing damage to monsters(that have some ai to follow where mc is going). Probably a boss fight once the timer hits a certain time. 
 
 
-Random Brain Dumping
-Single pc - Mari Chitose (千歳真璃）
-3 stages - village, feudal, modern tokyo - starting sequence: apocalyptic tokyo; ending sequence: neo tokyo
-3 bosses
-5 enemy types
-Endless playability
-Time scaling damage and health
-Random/Pickable Chests
-Exp + Gold drops
+*Random Brain Dumping*
+	- Single pc - Mari Chitose (千歳真璃）
+	- 3 stages - village, feudal, modern tokyo - starting sequence: apocalyptic tokyo; ending sequence: neo tokyo
+	- 3 bosses
+	- 5 enemy types
+	- Endless playability
+	- Time scaling damage and health
+	- Random/Pickable Chests
+	- Exp + Gold drops
 
 
 
 #UPDATES:
 **MILESTONE 1 UPDATES:**
--Our game is slowly evolving, as expected time was our biggest opponent. We have decided to shoot for our Minimum Viable Product, a single map with the mc fighting monsters, and a boss fight in the end.
+	-Our game is slowly evolving, as expected time was our biggest opponent. We have decided to shoot for our Minimum Viable Product, a single map with the mc fighting monsters, and a boss fight in the end.
 
 Technical Challenges:
-Evan: Currently in the process of making the sprites and map design, both of which I have no experience doing. This adds a learning curve for me to overcome. I do not think that these challenges will significantly impact the development timeline. After doing some research, I understand the gist of it and will now focus on creating it instead of how to create it.
+	Evan: Currently in the process of making the sprites and map design, both of which I have no experience doing. This adds a learning curve for me to overcome. I do not think that these challenges will significantly impact the development timeline. After doing some research, I understand the gist of it and will now focus on creating it instead of how to create it.
 
-Thomas: I had a bit of trouble implementing the kind of movement I wanted, but got it figured out. I also had trouble figuring out animations, but it was mostly my fault because I was being stubborn and not organizing my code into classes. With those two challenges taking a tad longer than expected, I did not have time to work on any basic weapon mechanics yet. I am getting faster and faster at understanding core concepts of pygame the longer I use it, however. I do not believe our final development timeline will be impacted.
+	Thomas: I had a bit of trouble implementing the kind of movement I wanted, but got it figured out. I also had trouble figuring out animations, but it was mostly my fault because I was being stubborn and not organizing my code into classes. With those two challenges taking a tad longer than expected, I did not have time to work on any basic weapon mechanics yet. I am getting faster and faster at understanding core concepts of pygame the longer I use it, however. I do not believe our final development timeline will be impacted.
 
 Project Timeline:
-Postponed tasks will be updated above. A name will be attached to the task that was delegated to that person.
+	- Postponed tasks will be updated above. A name will be attached to the task that was delegated to that person.
