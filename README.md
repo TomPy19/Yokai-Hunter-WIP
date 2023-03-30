@@ -4,7 +4,8 @@ Team Members:
 Evan Sok
 Thomas Personett 
 
-**Part 1: Game Design**\n
+**Part 1: Game Design**
+
 We will be creating a 2D roguelike game similar to Vampire Survivors with additional attributes similar to Risk of Rain. 
 
 Gimmick : random drops from chests and time-scaling(gets stronger over time)  monsters
