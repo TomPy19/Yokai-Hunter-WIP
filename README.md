@@ -94,7 +94,7 @@ Completed by Evan:
 	- Random/Pickable Chests
 	- Exp + Gold drops
 
-#UPDATES:
+**UPDATES:**
 **MILESTONE 1 UPDATES:**
 	-Our game is slowly evolving, as expected time was our biggest opponent. We have decided to shoot for our Minimum Viable Product, a single map with the mc fighting monsters, and a boss fight in the end.
 
