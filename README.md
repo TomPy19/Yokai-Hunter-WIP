@@ -11,7 +11,7 @@ We will be creating a 2D roguelike game similar to Vampire Survivors with additi
 Gimmick : random drops from chests and time-scaling(gets stronger over time)  monsters
 
 Concept Sketch(UI under develop):
-
+![](./concept.png)
 
 Our MC makes a deal with a time demon to go back in time to eradicate the yokai. She goes through different ages to collect souls(could change) from the bosses found in these places. 
 
