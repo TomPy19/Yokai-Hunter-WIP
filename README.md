@@ -26,6 +26,7 @@ Collectables:
 -Collect upgrade items to improve stats through item chests
 
 **Part 2: Development Design**
+
 Main - Control gameplay loop: All classes must pass information through this class to interact
 Model - Control logic
 View - Control display
@@ -42,6 +43,7 @@ Chest class - Controls logic of chest spawning/looting
 UI: Health, Exp, Time, Displayed Inventory, Control Popups, Pause Menu, Startup Screen
 
 **Part 3: Division of Labor**
+
 Evan will mostly be working on art/sound design for the game, but would like to code some aspects as well. Thomas will be doing the opposite, working mostly on coding the functionality of the game, but will work a bit on art/sound design.
 
 Evan - 60 hours total
@@ -50,9 +52,8 @@ Thomas - 60 hours total
 Time constraint will probably be our biggest potential issue but we plan to spend a lot of free time working on the project to create at least something we are proud of. We also will probably run into problems implementing certain aspects of our game through the pygame library, but through a lot of creative problem solving I’m sure our collaborative minds can make anything happen.
 
 **Part 4: Timeline**
+
 You will have 3 milestones to complete before submitting your final game project. The timeline should include tasks and deadlines for each milestone. Use your Game and Development Design sections to help build this timeline. Assign a group member to each task according to their roles and responsibilities.
-
-
 
 *Milestone 1: March 29*
 Completed by Thomas:
@@ -92,8 +93,6 @@ Completed by Evan:
 	- Time scaling damage and health
 	- Random/Pickable Chests
 	- Exp + Gold drops
-
-
 
 #UPDATES:
 **MILESTONE 1 UPDATES:**
