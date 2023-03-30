@@ -1,4 +1,4 @@
-# WIP
+# Yokai Hunter
  
 Team Members:
 Evan Sok
