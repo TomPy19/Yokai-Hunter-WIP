@@ -1,135 +1,184 @@
 import pygame, sys, os, csv
 
-SCREEN_SIZE = SCREEN_WIDTH, SCREEN_HEIGHT = 1920, 1080
+SCREEN_SIZE = SCREEN_WIDTH, SCREEN_HEIGHT = 1280, 720
 rectWidth, rectHeight = 100, 100
 
 pygame.init()
 
-scale = 3
-
+scale = 2
 screen = pygame.display.set_mode(SCREEN_SIZE)
+# screen = pygame.display.set_mode(SCREEN_SIZE, pygame.RESIZABLE)
 pygame.display.set_caption("Yokai Hunter")
 
-# mari = pygame.image.load("./sprites/mari/mari_step_1.png")
-# mari = pygame.transform.scale(mari, (mari.get_width()*scale,mari.get_height()*scale))
+# enemy = pygame.image.load("./sprites/lamp/chuuchin_obake_1.png")
+# enemy = pygame.transform.scale(enemy, (enemy.get_width()*scale, enemy.get_height()*scale))
 
-mari_move_animation = []
-for i in range(4):
-	temp = pygame.image.load(f'./sprites/mari/mari_step_{i}.png')
-	mari_move_animation.append(pygame.transform.scale(temp, (temp.get_width()*scale, temp.get_height()*scale)))
-
-enemy = pygame.image.load("./sprites/lamp/chuuchin_obake_1.png")
-enemy = pygame.transform.scale(enemy, (enemy.get_width()*scale, enemy.get_height()*scale))
-
-background = pygame.image.load("./map.png")
-background = pygame.transform.scale(background, (background.get_width()*scale, background.get_height()*scale))
+background = pygame.image.load("./map.png").convert()
+background = pygame.transform.scale(background, (background.get_width()*2*scale, background.get_height()*2*scale))
 
 clock = pygame.time.Clock()
 speed = 0
 
 enemy_pos = pygame.Vector2(0, 0)
-map_pos = pygame.Vector2(background.get_width() / 2 * -1, background.get_height() / 2 * -1)
+map_pos = pygame.Vector2((background.get_width() - screen.get_width()) / -2, (background.get_height() - screen.get_height()) / -2)
 
 dir = 0
 enemy_dir = 0
-update_time = pygame.time.get_ticks()
 frame_index = 0
 action = 0
 
-class Mari(pygame.sprite.Sprite):
+class Character(pygame.sprite.Sprite):
 	def __init__(self, scale):
 		pygame.sprite.Sprite.__init__(self)
 		self.dir = 0
 		self.action = 0
 		self.animation_list = []
-		for i in range(4):
-			temp = pygame.image.load(f'./sprites/mari/mari_step_{i}.png')
-			self.animation_list.append(pygame.transform.scale(temp, (temp.get_width()*scale, temp.get_height()*scale)))
 		self.frame_index = 0
-		self.update_time = pygame.time.get_ticks()
-		self.mari = self.animation_list[self.frame_index]
-		self.pos = pygame.Vector2(screen.get_width() / 2-64, screen.get_height() / 2-64)
+		self.scale = scale
 		
 	def update_action(self, new_action):
 		if new_action is not self.action:
 			self.action = new_action
 			self.frame_index = 0
 			self.update_time = pygame.time.get_ticks()
+			self.img = self.animation_list[self.frame_index]
+			if player.dir:
+				player.img = pygame.transform.flip(player.img, True, False)
 
-	def animate_move(self):
-		ANIMATION_COOLDOWN = 100
-		if pygame.time.get_ticks() - self.update_time > ANIMATION_COOLDOWN:
-			self.update_time = pygame.time.get_ticks()
-			self.frame_index += 1
-		if self.frame_index >= len(self.animation_list):
-			self.frame_index = 0
+	def animate_move(self, cd):
+		if self.action:
+			self.img = self.animation_list[self.frame_index]
+			if pygame.time.get_ticks() - self.update_time > cd:
+				self.update_time = pygame.time.get_ticks()
+				self.frame_index += 1
+			if self.frame_index >= len(self.animation_list):
+				self.frame_index = 0
+
+class Mari(Character):
+	def __init__(self, scale):
+		super().__init__(scale)
+		for i in range(4):
+			temp = pygame.image.load(f'./sprites/mari/mari_step_{i}.png').convert_alpha()
+			self.animation_list.append(pygame.transform.scale(temp, (temp.get_width()*self.scale, temp.get_height()*self.scale)))
+		self.frame_index = 0
+		self.update_time = pygame.time.get_ticks()
+		self.img = self.animation_list[self.frame_index]
+		self.pos = pygame.Vector2((screen.get_width() / 2) - (self.img.get_width() / 2), (screen.get_height() / 2) - (self.img.get_height() / 2))
+		self.speed = scale*1.5
+
+class Enemy(Character):
+	def __init__(self, scale, enemy, pos):
+		super().__init__(scale)
+		for i in range(2):
+			temp = pygame.image.load(f'./sprites/{enemy}/{enemy}_move_{i}.png').convert_alpha()
+			self.animation_list.append(pygame.transform.scale(temp, (temp.get_width()*self.scale, temp.get_height()*self.scale)))
+		self.frame_index = 0
+		self.update_time = pygame.time.get_ticks()
+		self.img = self.animation_list[self.frame_index]
+		self.pos = pos
+		self.action = 1
+		self.speed = scale*.75
+
+	def chase_player(self, player):
+		if self.pos.y > player.pos.y:
+			self.pos.y -= self.speed
+		if self.pos.y < player.pos.y:
+			self.pos.y += self.speed
+		if self.pos.x < player.pos.x:
+			self.pos.x += self.speed
+			if self.dir:
+				self.img = pygame.transform.flip(self.img, True, False)
+				self.dir = 0
+		if self.pos.x > player.pos.x:
+			self.pos.x -= self.speed
+			if not self.dir:
+				self.img = pygame.transform.flip(self.img, True, False)
+				self.dir = 1
 
 player = Mari(scale)
+obake = Enemy(scale, 'obake', pygame.Vector2(0,0))
+
+moving_left = False
+moving_right = False
+moving_up = False
+moving_down = False
+moving = False
 
 while True:
 	screen.blit(background, map_pos)
-	screen.blit(enemy, enemy_pos)
-	
-	# if flip:
-	# 	mari = pygame.transform.flip(mari, True, False)
-	# 	flip = False
-	screen.blit(player.mari, player.pos)
 	
 	for event in pygame.event.get():
-		if event.type == pygame.QUIT:
+		keys = pygame.key.get_pressed()
+		if event.type == pygame.QUIT or keys[pygame.K_ESCAPE]:
 			pygame.quit()
 			sys.exit()
+		elif event.type == pygame.VIDEORESIZE:
+			player.pos = pygame.Vector2((screen.get_width() / 2) - (player.img.get_width() / 2), (screen.get_height() / 2) - (player.img.get_height() / 2))
+			player = Mari(1)
+		if event.type == pygame.KEYDOWN:
+			if keys[pygame.K_LEFT]:
+				moving_left = True
+			if keys[pygame.K_RIGHT]:
+				moving_right = True
+			if keys[pygame.K_UP] and not keys[pygame.K_DOWN]:
+				moving_up = True
+			if keys[pygame.K_DOWN] and not keys[pygame.K_UP]:
+				moving_down = True
+		if event.type == pygame.KEYUP:
+			if not keys[pygame.K_LEFT]:
+				moving_left = False
+			if not keys[pygame.K_RIGHT]:
+				moving_right = False
+			if not keys[pygame.K_UP]:
+				moving_up = False
+			if not keys[pygame.K_DOWN]:
+				moving_down = False
+
+		if moving_left or moving_right or moving_down or moving_up:
+			moving = True
+			if moving_left and moving_right and not moving_down and not moving_up:
+				moving = False
+			if moving_down and moving_up and not moving_left and not moving_right:
+				moving = False
+		else:
+			moving = False
 
 	keys = pygame.key.get_pressed()
 	if keys[pygame.K_UP]:
-		map_pos.y += 3 * speed
-		enemy_pos.y += 3 * speed
-		player.update_action(1)
-	else:
-		player.update_action(0)
+		if map_pos.y <= 0:
+			map_pos.y += player.speed
+			obake.pos.y += player.speed
 	if keys[pygame.K_DOWN]:
-		map_pos.y -= 3 * speed
-		enemy_pos.y -= 3 * speed
-		player.update_action(1)
-	else:
-		player.update_action(0)
+		if map_pos.y >= -1 * background.get_height() + screen.get_height():
+			map_pos.y -= player.speed
+			obake.pos.y -= player.speed
 	if keys[pygame.K_LEFT]:
-		map_pos.x += 3 * speed
-		enemy_pos.x += 3 * speed
-		if not player.dir and not keys[pygame.K_RIGHT]:
-			mari = pygame.transform.flip(player.mari, True, False)
-			player.dir = 1
-		player.update_action(1)
-	else:
-		player.update_action(0)
+		if map_pos.x <= 0:
+			map_pos.x += player.speed
+			obake.pos.x += player.speed
+		player.dir = 1
 	if keys[pygame.K_RIGHT]:
-		map_pos.x -= 3 * speed
-		enemy_pos.x -= 3 * speed
-		if player.dir and not keys[pygame.K_LEFT]:
-			mari = pygame.transform.flip(player.mari, True, False)
-			player.dir = 0
+		if map_pos.x >= -1 * background.get_width() + screen.get_width():
+			map_pos.x -= player.speed
+			obake.pos.x -= player.speed
+		player.dir = 0
+
+	if moving:
 		player.update_action(1)
 	else:
 		player.update_action(0)
 
-	if enemy_pos.y > player.pos.y:
-		enemy_pos.y -= speed
-	if enemy_pos.y < player.pos.y:
-		enemy_pos.y += speed
-	if enemy_pos.x < player.pos.x:
-		enemy_pos.x += speed
-		if enemy_dir:
-			enemy = pygame.transform.flip(enemy, True, False)
-			enemy_dir = 0
-	if enemy_pos.x > player.pos.x:
-		enemy_pos.x -= speed
-		if not enemy_dir:
-			enemy = pygame.transform.flip(enemy, True, False)
-			enemy_dir = 1
+	if player.action:
+		player.animate_move(100)
+		if player.dir:
+			player.img = pygame.transform.flip(player.img, True, False)
+	screen.blit(player.img, player.pos)
+
+	obake.animate_move(250)
+	obake.chase_player(player)
+	screen.blit(obake.img, obake.pos)
 	
-	if action:
-		player.animate_move()
+	screen.blit(pygame.font.SysFont("Arial-Bold", 48).render(str(int(clock.get_fps())), 1, pygame.Color('red')), (0,0))
+	clock.tick(60)
 
 	pygame.display.update()
-	
-	speed = clock.tick(60) / 10
