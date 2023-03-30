@@ -95,13 +95,15 @@ Completed by Evan:
 	- Exp + Gold drops
 
 **UPDATES:**
+
 **MILESTONE 1 UPDATES:**
+
 	-Our game is slowly evolving, as expected time was our biggest opponent. We have decided to shoot for our Minimum Viable Product, a single map with the mc fighting monsters, and a boss fight in the end.
 
-Technical Challenges:
+*Technical Challenges:*
 	Evan: Currently in the process of making the sprites and map design, both of which I have no experience doing. This adds a learning curve for me to overcome. I do not think that these challenges will significantly impact the development timeline. After doing some research, I understand the gist of it and will now focus on creating it instead of how to create it.
 
 	Thomas: I had a bit of trouble implementing the kind of movement I wanted, but got it figured out. I also had trouble figuring out animations, but it was mostly my fault because I was being stubborn and not organizing my code into classes. With those two challenges taking a tad longer than expected, I did not have time to work on any basic weapon mechanics yet. I am getting faster and faster at understanding core concepts of pygame the longer I use it, however. I do not believe our final development timeline will be impacted.
 
-Project Timeline:
+*Project Timeline:*
 	- Postponed tasks will be updated above. A name will be attached to the task that was delegated to that person.
