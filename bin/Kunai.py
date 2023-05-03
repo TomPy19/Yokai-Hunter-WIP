@@ -79,7 +79,7 @@ class Kunai(pygame.sprite.Sprite):
 			self.current_speed = self.fixed_speed
 		# print(self.current_speed)
 		self.detect_collision(group)
-		if self.rect.right < self.screen.get_width()/2 + 120*self.scale and self.rect.left > self.screen.get_width()/2 - 120*self.scale and self.rect.top < self.screen.get_height()/2 + 120*self.scale and self.rect.bottom > self.screen.get_height()/2 - 120*self.scale:
+		if self.rect.right < self.screen.get_width()/2 + 360*self.scale and self.rect.left > self.screen.get_width()/2 - 360*self.scale and self.rect.top < self.screen.get_height()/2 + 360*self.scale and self.rect.bottom > self.screen.get_height()/2 - 360*self.scale:
 			self.rect.x += (self.dirx * self.current_speed)
 			self.rect.y += (self.diry * self.current_speed)
 		else:
