@@ -1,6 +1,6 @@
 import pygame
 
-def controls(map_pos, player, enemy_group, weapon_group, background, screen):
+def controls(map_pos, player, enemy_group, weapon_group, item_group, background, screen):
   for i in range(len(player.moving)):
     player.moving[i] = False
 
@@ -14,12 +14,16 @@ def controls(map_pos, player, enemy_group, weapon_group, background, screen):
         sprite.rect.y += player.speed
       for sprite in weapon_group:
         sprite.rect.y += player.speed
+      for sprite in item_group:
+        sprite.rect.y += player.speed
       player.moving[1] = True
     if map_pos.x >= -1 * background.get_width() + screen.get_width():
       map_pos.x -= player.speed
       for sprite in enemy_group:
         sprite.rect.x -= player.speed
       for sprite in weapon_group:
+        sprite.rect.x -= player.speed
+      for sprite in item_group:
         sprite.rect.x -= player.speed
       player.moving[0] = True
       player.looking = 0
@@ -32,12 +36,16 @@ def controls(map_pos, player, enemy_group, weapon_group, background, screen):
         sprite.rect.y += player.speed
       for sprite in weapon_group:
         sprite.rect.y += player.speed
+      for sprite in item_group:
+        sprite.rect.y += player.speed
       player.moving[1] = True
     if map_pos.x <= 0:
       map_pos.x += player.speed
       for sprite in enemy_group:
         sprite.rect.x += player.speed
       for sprite in weapon_group:
+        sprite.rect.x += player.speed
+      for sprite in item_group:
         sprite.rect.x += player.speed
       player.moving[2] = True
       player.looking = 1
@@ -50,12 +58,16 @@ def controls(map_pos, player, enemy_group, weapon_group, background, screen):
         sprite.rect.y -= player.speed
       for sprite in weapon_group:
         sprite.rect.y -= player.speed
+      for sprite in item_group:
+        sprite.rect.y -= player.speed
       player.moving[3] = True
     if map_pos.x <= 0:
       map_pos.x += player.speed
       for sprite in enemy_group:
         sprite.rect.x += player.speed
       for sprite in weapon_group:
+        sprite.rect.x += player.speed
+      for sprite in item_group:
         sprite.rect.x += player.speed
       player.moving[2] = True
       player.looking = 1
@@ -68,12 +80,16 @@ def controls(map_pos, player, enemy_group, weapon_group, background, screen):
         sprite.rect.y -= player.speed
       for sprite in weapon_group:
         sprite.rect.y -= player.speed
+      for sprite in item_group:
+        sprite.rect.y -= player.speed
       player.moving[3] = True
     if map_pos.x >= -1 * background.get_width() + screen.get_width():
       map_pos.x -= player.speed
       for sprite in enemy_group:
         sprite.rect.x -= player.speed
       for sprite in weapon_group:
+        sprite.rect.x -= player.speed
+      for sprite in item_group:
         sprite.rect.x -= player.speed
       player.moving[0] = True
       player.looking = 0
@@ -86,6 +102,8 @@ def controls(map_pos, player, enemy_group, weapon_group, background, screen):
         sprite.rect.x -= player.speed
       for sprite in weapon_group:
         sprite.rect.x -= player.speed
+      for sprite in item_group:
+        sprite.rect.x -= player.speed
       player.moving[0] = True
       player.looking = 0
     return
@@ -96,6 +114,8 @@ def controls(map_pos, player, enemy_group, weapon_group, background, screen):
       for sprite in enemy_group:
         sprite.rect.x += player.speed
       for sprite in weapon_group:
+        sprite.rect.x += player.speed
+      for sprite in item_group:
         sprite.rect.x += player.speed
       player.moving[2] = True
       player.looking = 1
@@ -108,6 +128,8 @@ def controls(map_pos, player, enemy_group, weapon_group, background, screen):
         sprite.rect.y += player.speed
       for sprite in weapon_group:
         sprite.rect.y += player.speed
+      for sprite in item_group:
+        sprite.rect.y += player.speed
       player.moving[1] = True
     return
   elif keys[pygame.K_s] and not keys[pygame.K_w]:
@@ -117,6 +139,8 @@ def controls(map_pos, player, enemy_group, weapon_group, background, screen):
       for sprite in enemy_group:
         sprite.rect.y -= player.speed
       for sprite in weapon_group:
+        sprite.rect.y -= player.speed
+      for sprite in item_group:
         sprite.rect.y -= player.speed
       player.moving[3] = True
     return
