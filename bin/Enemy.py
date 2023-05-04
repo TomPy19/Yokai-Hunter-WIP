@@ -2,7 +2,7 @@ import pygame
 from bin.Character import Character
 
 class Enemy(Character):
-	def __init__(self, scale, enemy, pos, screen, speed, health):
+	def __init__(self, scale, enemy, pos, screen, speed, health, ani_cd):
 		super().__init__(scale, screen)
 		self.enemy = enemy
 		for i in range(4):
@@ -16,6 +16,7 @@ class Enemy(Character):
 		self.speed = scale*speed
 		self.health = health
 		self.alive = True
+		self.ani_cd = ani_cd
 
 	def chase_player(self, player):
 		if self.rect.y > player.pos.y:

@@ -12,6 +12,7 @@ class Chest(pygame.sprite.Sprite):
       self.animation_list.append(pygame.transform.scale(temp, (temp.get_width()*self.scale, temp.get_height()*self.scale)))
     self.img = self.animation_list[self.frame_index]
     self.rect = self.img.get_rect()
+    self.image = self.img
     self.rect.x = pos.x
     self.rect.y = pos.y
       

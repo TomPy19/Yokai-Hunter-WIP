@@ -21,7 +21,7 @@ screen.set_colorkey(pygame.color.Color('black'))
 
 screen.blit(pygame.font.SysFont("Arial-Bold", 80).render("LOADING...", 1, pygame.Color('white')), (0,0))
 background = pygame.image.load("./map.png").convert()
-background = pygame.transform.scale(background, (background.get_width()*2*scale, background.get_height()*2*scale))
+background = pygame.transform.scale(background, (background.get_width()*scale, background.get_height()*scale))
 
 i_time = pygame.time.get_ticks()
 clock = pygame.time.Clock()
@@ -35,11 +35,13 @@ weapon_group = pygame.sprite.Group()
 weapon_group.add(knife)
 enemy_group = pygame.sprite.Group()
 spawn_time = pygame.time.get_ticks()
+chest_group = pygame.sprite.Group()
+chest_group = spawn_chests(screen, scale, chest_group)
 
 while True:
 	screen.blit(background, map_pos)
 	controls(map_pos, player, enemy_group, weapon_group, background, screen)
-	
+
 	for event in pygame.event.get():
 		keys = pygame.key.get_pressed()
 		if event.type == pygame.QUIT or keys[pygame.K_ESCAPE]:
@@ -54,26 +56,29 @@ while True:
 			enemy_group = new_group
 			background = pygame.transform.scale(background, (background.get_width()*scale, background.get_height()*scale))
 			map_pos = pygame.Vector2((background.get_width() - screen.get_width()) / -2, (background.get_height() - screen.get_height()) / -2)
-			
+
 
 	if enemy_group.sprites:
 		for sprite in enemy_group:
-			sprite.animate_move(250)
+			sprite.animate_move(sprite.ani_cd)
 			sprite.chase_player(player)
 			sprite.draw()
 
 	player.is_moving = player.check_moving()
 	if player.is_moving:
 		player.animate_move(100)
-	
+
 	if pygame.time.get_ticks() - knife.update_time > knife.cd:
 		knife = Kunai(player, scale, screen)
 		weapon_group.add(knife)
 	weapon_group.update(enemy_group)
 	weapon_group.draw(screen)
+	player.check_collision(enemy_group)
 	player.draw()
 	spawn_time = spawn_enemy(1000, spawn_time, screen, scale, enemy_group)
-	
+	chest_group.draw(screen)
+
+
 	screen.blit(pygame.font.SysFont("Arial-Bold", 48).render(str(int(clock.get_fps())), 1, pygame.Color('red')), (0,0))
 	UpdateClock(i_time, screen)
 	clock.tick(60)

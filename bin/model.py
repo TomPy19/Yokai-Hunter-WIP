@@ -26,23 +26,27 @@ def spawn_enemy(cd, spawn_time, screen, scale, enemy_group):
 		rand_enemy = random.choice(weights)
 		enemies = [{
 			'type': 'obake',
-			'health': 100,
-			'speed': .75
+			'health': 2,
+			'speed': .75,
+			'ani_cd': 250
 		}, {
 			'type': 'yuurei',
-			'health': 50,
-			'speed': 1
+			'health': 1,
+			'speed': 1,
+			'ani_cd': 150
 		}, {
 			'type': 'kappa',
-			'health': 150,
-			'speed': .5
+			'health': 3,
+			'speed': .5,
+			'ani_cd': 350
 		}]
-		enemy = Enemy(scale, enemies[rand_enemy]['type'], pygame.Vector2(randx, randy), screen, enemies[rand_enemy]['speed'], enemies[rand_enemy]['health'])
+		enemy = Enemy(scale, enemies[rand_enemy]['type'], pygame.Vector2(randx, randy), screen, 
+									enemies[rand_enemy]['speed'], enemies[rand_enemy]['health'], enemies[rand_enemy]['ani_cd'])
 		enemy_group.add(enemy)
-		# print(f'Enemy Spawned at {randx}, {randy}')
 	return spawn_time
 
 def spawn_chests(screen, scale, chest_group):
+	min = int((screen.get_width() / 2))
 	for i in range(20):
 		randx = (screen.get_width() / 2) + random.randint(min, min+100) * pow(-1, random.randint(1,2))
 		randy = (screen.get_height() / 2) + random.randint(min, min+100) * pow(-1, random.randint(1,2))

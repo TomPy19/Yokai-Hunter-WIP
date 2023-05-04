@@ -91,5 +91,7 @@ class Kunai(pygame.sprite.Sprite):
 	def detect_collision(self, group):
 		enemies = pygame.sprite.spritecollide(self, group, False)
 		if pygame.sprite.spritecollide(self, group, False):
-			group.remove(enemies[0])
+			enemies[0].health -= 1
+			if enemies[0].health == 0:
+				group.remove(enemies[0])
 			self.kill()
